@@ -61,6 +61,7 @@ const GetResumeList = async (c: Context): Promise<any> => {
   try {
     const prisma = getPrisma(c.env.DATABASE_URL);
     const { email } = c.get("user");
+    console.log("email - ", email)
     const response = await prisma.resume.findMany({
       where: {
         userEmail: email,
@@ -400,7 +401,7 @@ ${jobDescription}
 `;
 
     const { object } = await generateObject({
-      model: google("gemini-2.0-flash-001", {
+      model: google("gemini-2.5-flash", {
         structuredOutputs: false,
       }),
       schema: resumeAnalysisSchema,

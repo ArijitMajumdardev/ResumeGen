@@ -14,7 +14,7 @@ const handle_interview_generate = async (c: Context): Promise<any> => {
     const { type, role, level, techstack, amount, userid } = await c.req.json();
 
     const { text: questions } = await generateText({
-      model: google("gemini-2.0-flash-001"),
+      model: google("gemini-2.5-flash"),
       prompt: `Prepare questions for a job interview.
           The job role is ${role}.
           The job experience level is ${level}.
@@ -118,7 +118,7 @@ const Handle_Interview_Feedback = async (c: Context): Promise<any> => {
       )
       .join("");
     const { object } = await generateObject({
-      model: google("gemini-2.0-flash-001", {
+      model: google("gemini-2.5-flash", {
         structuredOutputs: false,
       }),
       schema: feedbackSchema,

@@ -1,25 +1,17 @@
-import { PrismaClient } from '@prisma/client/edge'
-import { withAccelerate } from '@prisma/extension-accelerate'
-
-// export const prisma = new PrismaClient().$extends(withAccelerate())
-
-
-
-// export const getPrisma = (database_url: string) => {
-//     const prisma = new PrismaClient({
-//       datasourceUrl: database_url,
-//     }).$extends(withAccelerate())
-//     return prisma
-//   }
-
+import { PrismaClient } from "@prisma/client";
+import { Pool } from "pg";
+import { PrismaPg } from "@prisma/adapter-pg";
 
 export const getPrisma = (database_url: string) => {
-    if (!database_url) {
-      throw new Error("DATABASE_URL is missing");
-    }
-    const prisma = new PrismaClient({
-      datasources: { db: { url: database_url } },
-    }).$extends(withAccelerate());
-    return prisma;
-  };
-  
+  if (!database_url) {
+    throw new Error("DATABASE_URL is missing");
+  }
+
+  const pool = new Pool({ connectionString: database_url });
+  const adapter = new PrismaPg(pool);
+  const prisma = new PrismaClient({ adapter });
+
+  return prisma;
+};
+
+

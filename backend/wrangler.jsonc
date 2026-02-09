@@ -5,6 +5,13 @@
   "compatibility_date": "2025-02-07",
   "compatibility_flags": [
     "nodejs_compat"
+  ],
+  "rules": [
+    {
+      "type": "CompiledWasm",
+      "globs": ["**/*.wasm"],
+      "fallthrough": true
+    }
   ]
   // "vars": {
   //   "DATABASE_URL":"prisma://accelerate.prisma-data.net/?api_key=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcGlfa2V5IjoiODJlZTk0OTEtYTZjNS00OWFjLTkyNzItMGZlYWRmMjE3YTJmIiwidGVuYW50X2lkIjoiNGUxZDE1ODUxYjYzNGVlZDI0ZDU3Nzk1NjRiMGNiYmJiNDEzMGZlN2UwOTI4MjJhNDkzOGZhNGE3ZjY5OTFlZSIsImludGVybmFsX3NlY3JldCI6Ijc2ODBmZWE4LWNkOTktNGY3Ni04YTU4LTM5NjNjYTkxMTY2YyJ9.uhJERYqZhZYkEUUoQLROWfxJB1NctfyoskXE6-pfIB0"

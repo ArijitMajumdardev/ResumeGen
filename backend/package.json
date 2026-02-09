@@ -12,21 +12,26 @@
   },
   "dependencies": {
     "@ai-sdk/google": "^1.2.3",
+    "@prisma/adapter-pg": "^7.3.0",
     "@prisma/client": "^6.5.0",
     "@prisma/extension-accelerate": "^1.2.1",
     "ai": "^4.2.8",
     "bcryptjs": "^2.4.3",
+    "dotenv": "^17.2.3",
     "hono": "^4.6.20",
     "jsonwebtoken": "^9.0.2",
     "mammoth": "^1.9.0",
-    "prisma": "^6.5.0",
+    "pg": "^8.18.0",
     "zod": "^3.24.2"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20250109.0",
     "@types/bcryptjs": "^2.4.6",
     "@types/jsonwebtoken": "^9.0.8",
+    "@types/pg": "^8.16.0",
     "dotenv-cli": "^8.0.0",
+    "prisma": "^6.5.0",
+    "tsx": "^4.21.0",
     "wrangler": "^4.10.0"
   }
 }
