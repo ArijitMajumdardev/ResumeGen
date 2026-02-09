@@ -13,6 +13,7 @@ client/dist-ssr
 *.local
 client/.env
 
+backend/src/generated
 
 node_modules
 dist

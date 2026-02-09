@@ -24,7 +24,7 @@ function App() {
     const fetchUserDetail = async () => {
       try {
         const res = await API.get("/user-detail");
-        console.log(res);
+        console.log(res.data.name,);
         if (res.status == 200) {
           setUser({
             email: res.data.email,

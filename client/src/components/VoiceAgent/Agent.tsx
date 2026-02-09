@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 import { vapi } from "@/lib/vapi.sdk";
-import {  useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { interviewer } from "@/constants/DummyData";
 import API from "@/lib/ServerAPI";
 import toast from "react-hot-toast";
@@ -87,31 +87,30 @@ const Agent = ({
           data: {
             userId,
             interviewId,
-            transcript: message, 
+            transcript: message,
           },
         },
         {
           headers: {
             "Content-Type": "application/json",
           },
-        }
+        },
       );
 
-      const { success, feedbackId }: { success: boolean; feedbackId: string } = response.data;
+      const { success, feedbackId }: { success: boolean; feedbackId: string } =
+        response.data;
 
       if (success && feedbackId) {
         navigate(`/interview/${interviewId}/feedback`);
       } else {
-        
         console.error("Error saving feedback: No feedbackId returned");
         toast.error("Something went wrong");
-        navigate("/"); 
+        navigate("/");
       }
     } catch (error) {
-
       console.error("Error occurred while generating feedback:", error);
       toast.error("Something went wrong");
-      navigate("/"); 
+      navigate("/");
     }
   };
 
@@ -121,7 +120,7 @@ const Agent = ({
     }
     if (callStatus === CallStatus.FINISHED) {
       if (type === "generate") {
-        navigate("/");
+        navigate("/interview/dashboard");
       } else {
         handleGenerateFeedback(messages);
       }
@@ -133,12 +132,19 @@ const Agent = ({
     setCallStatus(CallStatus.CONNECTING);
 
     if (type === "generate") {
-      await vapi.start(import.meta.env.VITE_VAPI_WORKFLOW_ID, {
-        variableValues: {
-          username: userName,
-          userid: userId,
+      console.log("gene", userId, userName);
+      await vapi.start(
+        undefined,
+        undefined,
+        undefined,
+        import.meta.env.VITE_VAPI_WORKFLOW_ID,
+        {
+          variableValues: {
+            username: userName,
+            userid: userId,
+          },
         },
-      });
+      );
     } else {
       let formattedQuestions = "";
       if (questions) {
@@ -164,7 +170,14 @@ const Agent = ({
   return (
     <>
       <div className="call-view">
-        <div className={cn('card-interviewer bg-base-1',callStatus == CallStatus.ACTIVE && isSpeaking ? 'border border-accent-1/40':'')}>
+        <div
+          className={cn(
+            "card-interviewer bg-base-1",
+            callStatus == CallStatus.ACTIVE && isSpeaking
+              ? "border border-accent-1/40"
+              : "",
+          )}
+        >
           <div className="avatar size-16">
             {/* <img
               src="/ai-avatar.png"
@@ -179,7 +192,14 @@ const Agent = ({
           <h3>AI Interviewer</h3>
         </div>
         {/* User Profile Card */}
-        <div className={cn('card-border ',callStatus == CallStatus.ACTIVE && !isSpeaking ? 'border border-accent-1/40':'')}>
+        <div
+          className={cn(
+            "card-border ",
+            callStatus == CallStatus.ACTIVE && !isSpeaking
+              ? "border border-accent-1/40"
+              : "",
+          )}
+        >
           <div className="card-content bg-base-1">
             {/* <img
               src="/user-avatar.png"
@@ -197,9 +217,10 @@ const Agent = ({
         <div className="rounded-2xl w-full ">
           <div className="bg-base-1 border-2 border-accent-2 rounded-2xl  min-h-14 px-5 py-3 flex items-center justify-center">
             <p
-              className={cn("text-lg text-center text-white",
+              className={cn(
+                "text-lg text-center text-white",
                 "transition-opacity duration-500 opacity-0",
-                "animate-fadeIn opacity-100"
+                "animate-fadeIn opacity-100",
               )}
             >
               {lastMessage}
@@ -216,7 +237,7 @@ const Agent = ({
             <span
               className={cn(
                 "absolute bg-[#49de50] h-[85%] w-[65%] animate-ping  rounded-full opacity-75",
-                callStatus !== CallStatus.CONNECTING && "hidden"
+                callStatus !== CallStatus.CONNECTING && "hidden",
               )}
             />
 

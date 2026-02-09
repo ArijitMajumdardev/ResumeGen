@@ -1,5 +1,5 @@
 import SharedResumePreview from "@/components/resume/SharedResumePreview";
-import axios from "axios";
+import API from "@/lib/ServerAPI";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
@@ -11,8 +11,8 @@ const SharedResumePage = () => {
   useEffect(() => {
     const getResume = async () => {
       try {
-        const response = await axios.get(
-          `${import.meta.env.VITE_API_URL}share/get-resume/${resumeId}`
+        const response = await API.get(
+          `share/get-resume/${resumeId}`
         );
         console.log("response", response);
         setResumeInfo(response.data);

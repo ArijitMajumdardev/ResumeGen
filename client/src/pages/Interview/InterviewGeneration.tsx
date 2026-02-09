@@ -3,7 +3,7 @@ import { useAuthContext } from '@/context/AuthProvider';
 
 const InterviewGeneration = () => {
   const { user } = useAuthContext();
-
+console.log(user)
   return (
     <div className="min-h-screen bg-[#05021E] px-6 py-10 text-white">
       <h3 className="text-3xl font-bold mb-8 text-center">
